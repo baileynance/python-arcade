@@ -14,6 +14,8 @@
 
 {Describe the tools that you used to develop the software}
 
+pip install arcade
+
 {Describe the programming language that you used and any libraries.}
 
 # Useful Websites
