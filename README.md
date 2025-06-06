@@ -4,7 +4,7 @@ The project will focus around creating a simple platforming game in Python using
 
 The purpose of thise project is to help with my personal development of creating video games. While my primary professional skill in programming is web development, I have been gaining more interest in learning how to develop games as a hobby. This project is a step towards creating a base knowledge for where to start and where to build off of in the future.
 
-[Software Demo Video](http://youtube.link.goes.here)
+https://youtu.be/XFfqgkP6BFE
 
 # Development Environment
 
