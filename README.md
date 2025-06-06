@@ -1,32 +1,26 @@
 # Overview
 
-{Important!  Do not say in this section that this is college assignment.  Talk about what you are trying to accomplish as a software engineer to further your learning.}
+The project will focus around creating a simple platforming game in Python using the arcade library. The user will be able to control the character sprite and interact with objects on the screen in order to jump over an object or "get" a coin to increase the player score.
 
-{Provide a description the game that you wrote. Describe how to play your game.}
-
-{Describe your purpose for writing this software.}
-
-{Provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the game being played and a walkthrough of the code.}
+The purpose of thise project is to help with my personal development of creating video games. While my primary professional skill in programming is web development, I have been gaining more interest in learning how to develop games as a hobby. This project is a step towards creating a base knowledge for where to start and where to build off of in the future.
 
 [Software Demo Video](http://youtube.link.goes.here)
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
+Python will be the main coding language and the Python arcade module will be imported
 
+arcade will be installed using the powershell command:
 pip install arcade
-
-{Describe the programming language that you used and any libraries.}
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-* [Web Site Name](http://url.link.goes.here)
-* [Web Site Name](http://url.link.goes.here)
+https://pypi.org/project/arcade/
+https://api.arcade.academy/en/stable/
+https://github.com/pythonarcade/arcade
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-* Item 1
-* Item 2
-* Item 3
+- Add more levels with text on the screen showing what level the user is on
+- Add enemies to the levels that move seperate from user input
+- Add moving sprite animations to character to give a better sense of movement
