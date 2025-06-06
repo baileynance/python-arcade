@@ -55,6 +55,8 @@ class GameView(arcade.Window):
 
         self.scene = None
 
+        self.tile_map = None
+
         self.camera = None
 
         self.gui_camera = None
@@ -76,11 +78,19 @@ class GameView(arcade.Window):
     def setup(self):
         """Set up the game here. Call this function to restart the game."""
 
-        # Creates a screne during the set up of game
-        self.scene = arcade.Scene()
+        layer_options = {
+            "Platforms": {
+                "use_spatial_hash": True
+            }
+        }
+
+        # Loads in map for game play
+        self.tile_map = arcade.load_tilemap(":resources:tiled_maps/map2_level_1.json", scaling=TILE_SCALING, layer_options=layer_options)
+
+        self.scene = arcade.Scene.from_tilemap(self.tile_map)
 
         # Loads in a texture to assign to player_texture using Arcades load_texture() method
-        self.player_texture = arcade.load_texture(":resources:images/animated_characters/female_adventurer/femaleAdventurer_idle.png")
+        self.player_texture = arcade.load_texture("./Sprites/Pink_Monster/Pink_Monster.png")
 
         # Uses player_texture and assigns a player sprite using Arcades Sprite() method
         self.player_sprite = arcade.Sprite(self.player_texture)
@@ -93,44 +103,7 @@ class GameView(arcade.Window):
         # Assigns player_list a sprite list using Arcades SpriteList() Method
         self.player_list = arcade.SpriteList()
         self.player_list.append(self.player_sprite)
-        # Assigns wall_list to a sprite list inside the scene
-        # Use spatial hash is used to detect collision on an object that is not likely to move
-        self.scene.add_sprite_list("Walls", use_spatial_hash=True)
-        # Assigns coin_list to a sprite list inside the scene while allowing spatial hashing for non moving objects
-        self.scene.add_sprite_list("Coins", use_spatial_hash=True)
-
-        # Creates a wall sprite every 64 pixels between x = 0 and x = 1250 for width of screen
-        # Results in a row of grass tiles across the bottom of the screen
-        for x in range(0, 1250, 64):
-            # Assigns a new sprite to wall variable using Arcades Sprite() method to be added to the wall_list
-            wall = arcade.Sprite(":resources:images/tiles/grassMid.png", scale=TILE_SCALING)
-            # Center of sprite on x-axis will be equal to 64x loop in for loop
-            wall.center_x = x
-            # Center of sprite on y axis will be equal to 32
-            wall.center_y = 32
-            # Adds each sprite created to the "Walls layer"
-            self.scene.add_sprite("Walls", wall)
-
-        # Declares specific coordinates for sprites to be drawn onto
-        # Results in a row of boxes across the screen at these coordinates
-        coordinate_list = [[512, 96], [256, 96], [768, 96]]
-        # Loops through each coordinate and draws sprites on those coordinates
-        for coordinate in coordinate_list:
-            # Assigns a new sprite to a wall variable to be added to the wall_list using the Arcade Sprite() method
-            wall = arcade.Sprite(":resources:images/tiles/boxCrate_double.png", scale=TILE_SCALING)
-            # Assigns the sprites position to the coordinate in the for loop
-            wall.position = coordinate
-            # Adds the new sprite to the "Walls" layer in the wall sprite list
-            self.scene.add_sprite("Walls", wall)
-
-        # Add coins to the world
-        for x in range(128, 1250, 256):
-            coin = arcade.Sprite(":resources:images/items/coinGold.png", scale=COIN_SCALING)
-            coin.center_x = x
-            coin.center_y = 96
-            # Adds the coin sprite to the "Coins" layer in the coin sprite list
-            self.scene.add_sprite("Coins", coin)
-
+       
         # The bottom code would be used for a top down experience
         # Uses Arcades built in simple engine and assigns to all sprite lists inside a physics_engine variable
         # self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
@@ -138,7 +111,7 @@ class GameView(arcade.Window):
         # Uses Arcades built in platformer physics engine and assigns to all sprite lists inside a physics_engine variable
         # Sets parameter gravity_constant to GRAVITY constant 
         # Passes wall_list as a walls parameter since arcade supports a walls and platforms parameter
-        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite, walls=self.scene["Walls"], gravity_constant=GRAVITY)
+        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite, walls=self.scene["Platforms"], gravity_constant=GRAVITY)
 
         # Initializes the camera that moves with the move around the player
         self.camera = arcade.Camera2D()
